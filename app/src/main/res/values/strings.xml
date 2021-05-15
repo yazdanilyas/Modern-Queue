@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Modern Queue</string>
+    <string name="title_activity_dashboard">MainActivity</string>
+    <string name="title_my_sessions">My Sessions</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_more">More</string>
+    <string name="doctor">Doctor</string>
+    <string name="continue_as_a">Continue As a</string>
+    <string name="patient">Patient</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="hospital_name">Hospital name</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="hospital_info">Clinical Info</string>
+    <string name="district">District</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="share_app">Share App</string>
+    <string name="share_app_message">Long Queue is frustrating, Let me recommend you the solution to it. Install this app and blow away the frustration:\n</string>
+    <string name="login">Login</string>
+    <string name="not_yet_registered_sign_up">Not yet registered? Sign Up</string>
+    <string name="already_have_account_login">Already have account? Login</string>
+    <string name="rate_us">Rate us</string>
+    <string name="password">Password</string>
+    <string name="error_password">Minimum 6 characters required</string>
+    <string name="error_email">Email is invalid</string>
+    <string name="error_phone">Phone is invalid</string>
+    <string name="required_field">Required field</string>
+    <string name="speciality">speciality</string>
+</resources>
