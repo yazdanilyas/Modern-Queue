@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cybereast.virtualqueue">
+    package="com.cybereast.modernqueue">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,12 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualQueue">
+        <activity android:name=".patient.PatientSigninActivity"></activity>
+        <activity
+            android:name=".doctor.ui.activities.AddSessionActivity"
+            android:label="@string/add_session"></activity>
+        <activity android:name=".doctor.ui.activities.EditProfileActivity" />
+        <activity android:name=".doctor.ui.activities.ChooserActivity" />
         <activity android:name=".doctor.ui.activities.LoginActivity" />
         <activity android:name=".doctor.ui.activities.SignUpActivity" />
         <activity
             android:name=".doctor.ui.activities.DashboardActivity"
             android:label="@string/title_activity_dashboard" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".doctor.ui.activities.SplashActivity"
+            android:theme="@style/NoToolBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "178931719634",
+    "project_id": "modern-queue",
+    "storage_bucket": "modern-queue.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178931719634:android:9638d8bdc00c8593ac3c0b",
+        "android_client_info": {
+          "package_name": "com.cybereast.modernqueue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178931719634-t8nupiq48b81tb3jbhf63jqj1s3qu703.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFIJg7pEg1mAfNYL9m36yHTQuqaz4vR0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178931719634-t8nupiq48b81tb3jbhf63jqj1s3qu703.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

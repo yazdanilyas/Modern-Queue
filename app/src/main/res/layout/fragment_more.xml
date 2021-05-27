@@ -11,7 +11,7 @@
         android:id="@+id/shareAppCv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_5dp"
         android:backgroundTint="@color/blue"
         android:elevation="@dimen/_5dp"
         android:foreground="@drawable/ripple_effect"
@@ -46,7 +46,7 @@
         android:id="@+id/rateAppCv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_5dp"
         android:backgroundTint="@color/blue"
         android:elevation="@dimen/_5dp"
         android:foreground="@drawable/ripple_effect"
@@ -72,6 +72,41 @@
                 android:text="@string/rate_us"
                 android:textColor="@color/white"
                 app:layout_constraintLeft_toRightOf="@+id/rateImg"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logoutCv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5dp"
+        android:backgroundTint="@color/blue"
+        android:elevation="@dimen/_5dp"
+        android:foreground="@drawable/ripple_effect"
+        app:contentPadding="@dimen/_10dp"
+        app:layout_constraintTop_toBottomOf="@id/rateAppCv">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoutImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toRightOf="@+id/logoutImg"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

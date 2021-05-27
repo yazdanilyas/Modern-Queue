@@ -3,23 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_session">
+    app:startDestination="@+id/navigation_profile">
 
     <fragment
         android:id="@+id/navigation_session"
-        android:name="com.cybereast.virtualqueue.doctor.ui.fragments.sessions.SessionsFragment"
+        android:name="com.cybereast.modernqueue.doctor.ui.fragments.sessions.SessionsFragment"
         android:label="@string/title_my_sessions"
-        tools:layout="@layout/fragment_sessions" />
+        tools:layout="@layout/fragment_sessions">
+        <action
+            android:id="@+id/action_navigation_session_to_navigation_bookings"
+            app:destination="@id/navigation_bookings" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.cybereast.virtualqueue.doctor.ui.fragments.profile.ProfileFragment"
+        android:name="com.cybereast.modernqueue.doctor.ui.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.cybereast.virtualqueue.doctor.ui.fragments.more.MoreFragment"
+        android:name="com.cybereast.modernqueue.doctor.ui.fragments.more.MoreFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/navigation_bookings"
+        android:name="com.cybereast.modernqueue.doctor.ui.fragments.myBookings.MyBookingsFragment"
+        android:label="@string/booking"
+        tools:layout="@layout/fragment_my_bookings" />
 </navigation>

@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".doctor.ui.activities.LoginActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/personalInfoCard"
         android:layout_width="match_parent"
@@ -23,12 +34,12 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:textColor="@color/blue"
                 android:id="@+id/loginLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_extra_bold"
                 android:text="@string/login"
+                android:textColor="@color/blue"
                 android:textSize="@dimen/_20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -36,20 +47,20 @@
             </androidx.appcompat.widget.AppCompatTextView>
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/firstNameEt"
+                android:id="@+id/userEmailEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
                 android:background="@drawable/shape_edit_text"
-                android:hint="@string/mobile_no"
-                android:inputType="phone"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:lines="1"
                 android:maxLines="1"
                 android:paddingHorizontal="@dimen/_10dp"
                 app:layout_constraintTop_toBottomOf="@+id/loginLabel" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/lastNameEt"
+                android:id="@+id/userPasswordEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
@@ -59,7 +70,7 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:paddingHorizontal="@dimen/_10dp"
-                app:layout_constraintTop_toBottomOf="@+id/firstNameEt" />
+                app:layout_constraintTop_toBottomOf="@+id/userEmailEt" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginBtn"
@@ -70,20 +81,21 @@
                 android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/lastNameEt" />
+                app:layout_constraintTop_toBottomOf="@+id/userPasswordEt" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:textColor="@color/blue"
-                android:layout_marginTop="@dimen/_10dp"
                 android:id="@+id/signUpTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/not_yet_registered_sign_up"
+                android:textColor="@color/blue"
                 android:textSize="@dimen/_15sp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loginBtn"/>
+                app:layout_constraintTop_toBottomOf="@id/loginBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
