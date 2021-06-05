@@ -1,6 +1,7 @@
 package com.cybereast.modernqueue.models
 
 data class Doctor(
+    var uId: String? = null,
     var firstName: String? = null,
     var lastName: String? = null,
     var email: String? = null,

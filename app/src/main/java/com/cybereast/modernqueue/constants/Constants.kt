@@ -6,5 +6,6 @@ object Constants {
     const val COLLECTION_DOCTORS: String = "doctors"
     const val COLLECTION_PROFILE: String = "profile"
     const val COLLECTION_SESSIONS: String = "sessions"
+    const val RC_SIGN_IN: Int = 100
 
 }

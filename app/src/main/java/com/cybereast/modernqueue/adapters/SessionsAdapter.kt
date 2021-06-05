@@ -36,11 +36,12 @@ class SessionsAdapter(
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         holder.binding.obj = sessionList[position]
         holder.binding.sessionItem.setOnClickListener {
-            mRecyclerListener.onClick(it, sessionList[position])
+            mRecyclerListener.onClick(sessionList[position], position)
         }
         holder.binding.optionImg.setOnClickListener {
             mRecyclerListener.onItemChildClick(it, sessionList[position])
         }
+
         holder.binding.bookingSwitch.setOnTouchListener { view: View, motionEvent: MotionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {

@@ -22,13 +22,14 @@ import com.cybereast.modernqueue.utils.InputValidation.isValidPhone
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class SignUpActivity : AppCompatActivity(), ValidationListener {
     private lateinit var mBinding: ActivitySignUpBinding
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
     private lateinit var doctorDocumentRef: DocumentReference
     private val mAuth = FirebaseAuth.getInstance()
-
+    private val dummyMap = mapOf<String, Any>("dummyKey" to "dummyValue")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -56,15 +57,16 @@ class SignUpActivity : AppCompatActivity(), ValidationListener {
     private fun signUp() {
         showHideProgressBar(mBinding.progressBar, View.VISIBLE)
         val doctor = Doctor(
-            mBinding.firstNameEt.text.toString(),
-            mBinding.lastNameEt.text.toString(),
+            null,
+            mBinding.firstNameEt.text.toString().capitalize(Locale.ENGLISH),
+            mBinding.lastNameEt.text.toString().capitalize(Locale.ENGLISH),
             mBinding.emailEt.text.toString(),
             mBinding.mobileNoEt.text.toString(),
             mBinding.passwordEt.text.toString(),
-            mBinding.hospitalNameEt.text.toString(),
+            mBinding.hospitalNameEt.text.toString().capitalize(Locale.ENGLISH),
             mBinding.countryNameEt.text.toString(),
-            mBinding.stateEt.text.toString(),
-            mBinding.districtEt.text.toString(),
+            mBinding.stateEt.text.toString().capitalize(Locale.ENGLISH),
+            mBinding.districtEt.text.toString().capitalize(Locale.ENGLISH),
             mBinding.specialityEt.text.toString(),
             Integer.parseInt(mBinding.consultFeeEt.text.toString()),
             false
@@ -74,14 +76,18 @@ class SignUpActivity : AppCompatActivity(), ValidationListener {
                 if (it.isSuccessful) {
                     val uId = it.result?.user?.uid
                     if (uId != null) {
-
+                        doctor.uId = uId
                         doctorDocumentRef =
                             fireStoreDbRef.collection(COLLECTION_DOCTORS).document(uId).collection(
                                 Constants.COLLECTION_PROFILE
                             ).document()
                         doctorDocumentRef.set(doctor).addOnSuccessListener {
                             showHideProgressBar(mBinding.progressBar, View.GONE)
+
+                            fireStoreDbRef.collection(COLLECTION_DOCTORS).document(uId)
+                                .set(dummyMap)
                             ActivityUtils.startActivity(this, DashboardActivity::class.java)
+                            this.finish()
                             showToast(
                                 applicationContext,
                                 getString(R.string.sign_up_success_message)
@@ -100,6 +106,7 @@ class SignUpActivity : AppCompatActivity(), ValidationListener {
             }
 
     }
+
 
     private fun setListeners() {
         mBinding.signUpButton.setOnClickListener {

@@ -3,8 +3,8 @@ package com.cybereast.modernqueue.doctor.ui.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cybereast.modernqueue.databinding.ActivityMainBinding
+import com.cybereast.modernqueue.patient.activities.PatientSigninActivity
 import com.cybereast.modernqueue.utils.ActivityUtils
-import com.cybereast.modernqueue.utils.AppUtils
 import com.google.firebase.auth.FirebaseAuth
 
 class ChooserActivity : AppCompatActivity() {
@@ -22,7 +22,7 @@ class ChooserActivity : AppCompatActivity() {
             checkUserSession()
         }
         mBinding.patientCardView.setOnClickListener {
-            AppUtils.showToast(applicationContext, "Under developing")
+            ActivityUtils.startActivity(this, PatientSigninActivity::class.java)
         }
     }
 

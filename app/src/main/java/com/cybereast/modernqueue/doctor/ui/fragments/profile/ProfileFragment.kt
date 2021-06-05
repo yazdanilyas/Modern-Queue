@@ -112,9 +112,16 @@ class ProfileFragment : Fragment() {
         if (uid != null) {
             fireStoreDb.collection(Constants.COLLECTION_DOCTORS).document(uid.toString())
                 .collection(Constants.COLLECTION_PROFILE).get().addOnSuccessListener {
-                    val currentUser = it.toObjects(Doctor::class.java).get(0)
-                    setProfileData(currentUser)
-                    AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                    if (!it.isEmpty) {
+                        val currentUser = it.toObjects(Doctor::class.java)
+                        setProfileData(currentUser[0])
+                        AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                    } else {
+                        AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                        AppUtils.showToast(requireContext(), getString(R.string.session_expired))
+                        ActivityUtils.startActivity(requireActivity(), LoginActivity::class.java)
+                        activity?.finish()
+                    }
 
                 }.addOnFailureListener {
                     AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)

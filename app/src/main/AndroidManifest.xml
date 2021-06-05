@@ -11,17 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualQueue">
-        <activity android:name=".patient.PatientSigninActivity"></activity>
         <activity
-            android:name=".doctor.ui.activities.AddSessionActivity"
-            android:label="@string/add_session"></activity>
-        <activity android:name=".doctor.ui.activities.EditProfileActivity" />
-        <activity android:name=".doctor.ui.activities.ChooserActivity" />
-        <activity android:name=".doctor.ui.activities.LoginActivity" />
-        <activity android:name=".doctor.ui.activities.SignUpActivity" />
-        <activity
-            android:name=".doctor.ui.activities.DashboardActivity"
-            android:label="@string/title_activity_dashboard" />
+            android:name=".patient.activities.PatientDashboardActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".doctor.ui.activities.SplashActivity"
             android:theme="@style/NoToolBar">
@@ -31,6 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".patient.activities.PatientSigninActivity" />
+        <activity
+            android:name=".doctor.ui.activities.AddSessionActivity"
+            android:label="@string/add_session" />
+        <activity android:name=".doctor.ui.activities.EditProfileActivity" />
+        <activity android:name=".doctor.ui.activities.ChooserActivity" />
+        <activity android:name=".doctor.ui.activities.LoginActivity" />
+        <activity android:name=".doctor.ui.activities.SignUpActivity" />
+        <activity
+            android:name=".doctor.ui.activities.DashboardActivity"
+            android:label="@string/title_activity_dashboard" />
+        <activity android:name=".wrapper.FrameActivity" />
     </application>
 
 </manifest>

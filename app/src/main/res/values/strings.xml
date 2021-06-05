@@ -53,4 +53,10 @@
     <string name="no_data_found">No data found</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">This is booking screen under development</string>
+    <string name="my_booking">My booking</string>
+    <string name="search_doctor">Search doctor</string>
+    <string name="not_available_today">Not available today</string>
+    <string name="available_today">Available</string>
+    <string name="search">Search</string>
+
 </resources>

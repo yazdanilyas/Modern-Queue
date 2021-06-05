@@ -1,6 +1,9 @@
 package com.cybereast.modernqueue.utils
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -37,5 +40,31 @@ object AppUtils {
             .placeholder(circularProgressDrawable)
             .into(imageContainer)
     }
+
+    fun rateApp(activity: Activity) {
+        val rateIntent =
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=" + activity.packageName)
+            )
+        activity.startActivity(rateIntent)
+    }
+
+    fun shareApp(activity: Activity) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            activity.getString(R.string.share_app_message) + "https://play.google.com/store/apps/details?id=" + activity.packageName
+        )
+        activity.startActivity(shareIntent)
+
+    }
+
+    fun capitalizeFirstLetter(string: String): String {
+        val firstLetter = string[0]
+        return firstLetter + string.substring(1)
+    }
+
 
 }

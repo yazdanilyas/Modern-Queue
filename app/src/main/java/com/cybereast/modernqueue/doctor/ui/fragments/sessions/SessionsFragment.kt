@@ -26,15 +26,15 @@ import com.google.firebase.firestore.QuerySnapshot
 class SessionsFragment : Fragment() {
 
     private lateinit var sessionsViewModel: SessionsViewModel
+    private lateinit var doctorDocumentRef: DocumentReference
     private lateinit var mBinding: FragmentSessionsBinding
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
-    private lateinit var doctorDocumentRef: DocumentReference
     private val mAuth = FirebaseAuth.getInstance()
     var mUId = mAuth.currentUser?.uid
     private var sessionList: ArrayList<Session> = ArrayList()
     private lateinit var mAdapter: SessionsAdapter
     private var mRecyclerListener = object : RecyclerItemClickListener {
-        override fun onClick(view: View, data: Any?) {
+        override fun onClick(data: Any?, position: Int) {
             val session = data as Session
             findNavController().navigate(R.id.action_navigation_session_to_navigation_bookings)
             Log.d("TAG", "onClick: ${session.documentId}")
@@ -43,6 +43,10 @@ class SessionsFragment : Fragment() {
         override fun onItemChildClick(view: View, data: Any?) {
             val session = data as Session
             deletePopUp(view, session.documentId)
+
+        }
+
+        override fun onSeeProfile(data: Any?, position: Int) {
 
         }
 

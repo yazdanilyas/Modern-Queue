@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/menu_search_doc"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search_doctor" />
+    <item
+        android:id="@+id/menu_bookings"
+        android:icon="@drawable/ic_booking"
+        android:title="@string/my_booking" />
+    <item
+        android:id="@+id/menu_more"
+        android:icon="@drawable/ic_more"
+        android:title="@string/title_more" />
+</menu>
