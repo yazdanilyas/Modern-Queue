@@ -9,6 +9,7 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/searchEt"
+        android:hint="Search name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10dp"
