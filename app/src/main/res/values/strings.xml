@@ -58,5 +58,6 @@
     <string name="not_available_today">Not available today</string>
     <string name="available_today">Available</string>
     <string name="search">Search</string>
+    <string name="see_sessions">See Sessions</string>
 
 </resources>

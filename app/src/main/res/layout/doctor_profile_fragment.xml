@@ -72,12 +72,43 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sessionCv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:paddingHorizontal="@dimen/_10dp"
+            app:cardCornerRadius="@dimen/_5dp"
+            app:cardElevation="@dimen/_4dp"
+            app:layout_constraintTop_toBottomOf="@+id/availabilityCv">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_15dp"
+                android:paddingVertical="@dimen/_10dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/sessionLabelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="@string/see_sessions"
+                    android:textSize="@dimen/_20sp"
+                    tools:ignore="RelativeOverlap" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/availabilityCv">
+            app:layout_constraintTop_toBottomOf="@id/sessionCv">
 
             <LinearLayout
                 android:id="@+id/linearLay"

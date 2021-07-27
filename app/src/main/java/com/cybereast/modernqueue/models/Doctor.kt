@@ -1,5 +1,7 @@
 package com.cybereast.modernqueue.models
 
+import java.io.Serializable
+
 data class Doctor(
     var uId: String? = null,
     var firstName: String? = null,
@@ -14,4 +16,4 @@ data class Doctor(
     var speciality: String? = null,
     var consultancyFee: Int = 0,
     var available: Boolean? = false
-)
+):Serializable

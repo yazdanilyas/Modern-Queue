@@ -22,7 +22,7 @@ class PatientSigninActivity : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+//            if (result.resultCode == Activity.RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 try {
                     // Google Sign In was successful, authenticate with Firebase
@@ -33,7 +33,7 @@ class PatientSigninActivity : AppCompatActivity() {
                     // Google Sign In failed, update UI appropriately
                     Log.w("TAG", "Google sign in failed", e)
                 }
-            }
+//            }
         }
 
     private fun firebaseAuthWithGoogle(idToken: String) {

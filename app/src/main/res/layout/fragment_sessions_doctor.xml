@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?actionBarSize"
-        tools:listitem="@layout/item_session_recycler" />
+        tools:listitem="@layout/item_session_recycler_doctor" />
 
     <ProgressBar
         android:id="@+id/progressBar"

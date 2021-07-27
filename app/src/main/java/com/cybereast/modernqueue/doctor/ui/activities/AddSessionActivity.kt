@@ -41,11 +41,11 @@ class AddSessionActivity : AppCompatActivity(), ValidationListener {
 
     override fun onSuccess() {
         val session = Session(
-            null,
-            mBinding.startTimeEt.text.toString(),
-            mBinding.endTimeEt.text.toString(),
-            Integer.parseInt(mBinding.noOfTokens.text.toString()),
-            false
+                null,
+                mBinding.startTimeEt.text.toString(),
+                mBinding.endTimeEt.text.toString(),
+                Integer.parseInt(mBinding.noOfTokens.text.toString()),
+                false
         )
         addNewSession(session)
     }
@@ -70,10 +70,11 @@ class AddSessionActivity : AppCompatActivity(), ValidationListener {
         mUId = mAuth.currentUser?.uid
         if (mUId != null) {
             doctorDocumentRef =
-                fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
-                    .collection(
-                        Constants.COLLECTION_SESSIONS
-                    ).document()
+                    fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
+                            .collection(
+                                    Constants.COLLECTION_SESSIONS
+                            ).document()
+
             doctorDocumentRef.set(session).addOnSuccessListener {
                 AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
                 AppUtils.showToast(this, getString(R.string.session_added))
@@ -104,18 +105,18 @@ class AddSessionActivity : AppCompatActivity(), ValidationListener {
 
         // Launch Time Picker Dialog
         val timePickerDialog = TimePickerDialog(
-            activity, { view, hourOfDay, minute ->
-                time = setTime12Hour(hourOfDay, minute)
-                if (isStart) {
-                    mBinding.startTimeEt.setText(time)
-                } else {
+                activity, { view, hourOfDay, minute ->
+            time = setTime12Hour(hourOfDay, minute)
+            if (isStart) {
+                mBinding.startTimeEt.setText(time)
+            } else {
 
-                    mBinding.endTimeEt.setText(time)
-                }
-            },
-            mHour,
-            mMinute,
-            false
+                mBinding.endTimeEt.setText(time)
+            }
+        },
+                mHour,
+                mMinute,
+                false
         )
         timePickerDialog.show()
         return time
