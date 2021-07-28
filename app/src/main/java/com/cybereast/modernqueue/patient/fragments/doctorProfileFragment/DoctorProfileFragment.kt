@@ -12,8 +12,8 @@ import com.cybereast.modernqueue.base.BaseInterface
 import com.cybereast.modernqueue.constants.Constants
 import com.cybereast.modernqueue.databinding.DoctorProfileFragmentBinding
 import com.cybereast.modernqueue.doctor.ui.activities.LoginActivity
-import com.cybereast.modernqueue.doctor.ui.fragments.sessions.DoctorsSessionsFragment
 import com.cybereast.modernqueue.models.Doctor
+import com.cybereast.modernqueue.patient.fragments.sessions.DoctorsSessionsFragment
 import com.cybereast.modernqueue.utils.ActivityUtils
 import com.cybereast.modernqueue.utils.AppUtils
 import com.cybereast.modernqueue.utils.CommonKeys

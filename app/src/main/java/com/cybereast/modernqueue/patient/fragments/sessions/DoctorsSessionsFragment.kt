@@ -1,4 +1,4 @@
-package com.cybereast.modernqueue.doctor.ui.fragments.sessions
+package com.cybereast.modernqueue.patient.fragments.sessions
 
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +11,8 @@ import com.cybereast.modernqueue.R
 import com.cybereast.modernqueue.adapters.SessionsAdapterPatient
 import com.cybereast.modernqueue.constants.Constants
 import com.cybereast.modernqueue.databinding.FragmentSessionsBinding
+import com.cybereast.modernqueue.databinding.FragmentSessionsDoctorBinding
+import com.cybereast.modernqueue.doctor.ui.fragments.sessions.DoctorsSessionsViewModel
 import com.cybereast.modernqueue.enums.BookingStatus
 import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
 import com.cybereast.modernqueue.listeners.SwitchStateListener
@@ -29,7 +31,7 @@ class DoctorsSessionsFragment : Fragment() {
 
     private lateinit var doctorsSessionsViewModel: DoctorsSessionsViewModel
     private lateinit var doctorDocumentRef: DocumentReference
-    private lateinit var mBinding: FragmentSessionsBinding
+    private lateinit var mBinding: FragmentSessionsDoctorBinding
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
     private val mAuth = FirebaseAuth.getInstance()
     private var mUId: String? = null
@@ -72,8 +74,29 @@ class DoctorsSessionsFragment : Fragment() {
     }
 
     private fun saveBooking(session: Session, doctor: Doctor?) {
-        val booking = Booking(doctor, session, BookingStatus.OPENED.toString(), patientUserId, "Hassan", "3120519340")
-        doctorDocumentRef = fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING).document()
+
+        val booking = Booking(
+            doctor?.uId,
+            doctor?.firstName,
+            doctor?.lastName,
+            doctor?.email,
+            doctor?.mobile,
+            doctor?.hospitalName,
+            doctor?.speciality,
+            doctor?.consultancyFee,
+            doctor?.available,
+            session.documentId,
+            session.startTime,
+            session.endTime,
+            session.noOfTokens,
+            session.booking,
+            BookingStatus.OPENED.toString(),
+            patientUserId,
+            "Hassan",
+            "3120519340"
+        )
+        doctorDocumentRef =
+            fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING).document()
 
         doctorDocumentRef.set(booking).addOnSuccessListener {
             AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
@@ -106,12 +129,12 @@ class DoctorsSessionsFragment : Fragment() {
 
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
-        mBinding = FragmentSessionsBinding.inflate(inflater, container, false)
+        mBinding = FragmentSessionsDoctorBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -141,18 +164,18 @@ class DoctorsSessionsFragment : Fragment() {
         val session = data as Session
         val sessionMap = mapOf<String, Any>("booking" to checked)
         fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
-                .collection(
-                        Constants.COLLECTION_SESSIONS
-                ).document(session.documentId.toString()).update(sessionMap).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        if (checked)
-                            AppUtils.showToast(requireContext(), "Booking opened")
-                        else
-                            AppUtils.showToast(requireContext(), "Booking closed")
-                    }
-                }.addOnFailureListener {
-                    AppUtils.showToast(requireContext(), it.message.toString())
+            .collection(
+                Constants.COLLECTION_SESSIONS
+            ).document(session.documentId.toString()).update(sessionMap).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    if (checked)
+                        AppUtils.showToast(requireContext(), "Booking opened")
+                    else
+                        AppUtils.showToast(requireContext(), "Booking closed")
                 }
+            }.addOnFailureListener {
+                AppUtils.showToast(requireContext(), it.message.toString())
+            }
 
     }
 
@@ -160,10 +183,10 @@ class DoctorsSessionsFragment : Fragment() {
     private fun getAllSessions() {
         AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)
         val query =
-                fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
-                        .collection(
-                                Constants.COLLECTION_SESSIONS
-                        )
+            fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
+                .collection(
+                    Constants.COLLECTION_SESSIONS
+                )
         query.addSnapshotListener { value: QuerySnapshot?, error: FirebaseFirestoreException? ->
             if (value != null && error == null) {
                 sessionList.clear()
@@ -195,15 +218,15 @@ class DoctorsSessionsFragment : Fragment() {
     private fun deleteSession(view: View, documentId: String?) {
         AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)
         fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
-                .collection(
-                        Constants.COLLECTION_SESSIONS
-                ).document(documentId.toString()).delete().addOnSuccessListener {
-                    AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
-                    AppUtils.showToast(requireActivity(), getString(R.string.session_deleted))
-                }.addOnFailureListener {
-                    AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
-                    AppUtils.showToast(requireActivity(), it.message.toString())
-                }
+            .collection(
+                Constants.COLLECTION_SESSIONS
+            ).document(documentId.toString()).delete().addOnSuccessListener {
+                AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                AppUtils.showToast(requireActivity(), getString(R.string.session_deleted))
+            }.addOnFailureListener {
+                AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                AppUtils.showToast(requireActivity(), it.message.toString())
+            }
 
     }
 
@@ -223,9 +246,9 @@ class DoctorsSessionsFragment : Fragment() {
 
     private fun setUpRecycler(sessionList: java.util.ArrayList<Session>) {
         mAdapter =
-                SessionsAdapterPatient(sessionList, mRecyclerListener, mSwitchListener)
+            SessionsAdapterPatient(sessionList, mRecyclerListener, mSwitchListener)
         mBinding.sessionRecycler.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         mBinding.sessionRecycler.setHasFixedSize(true)
         mBinding.sessionRecycler.adapter = mAdapter
 
