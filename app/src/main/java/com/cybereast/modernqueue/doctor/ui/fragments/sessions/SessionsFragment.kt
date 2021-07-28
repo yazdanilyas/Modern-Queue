@@ -17,6 +17,7 @@ import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
 import com.cybereast.modernqueue.listeners.SwitchStateListener
 import com.cybereast.modernqueue.models.Session
 import com.cybereast.modernqueue.utils.AppUtils
+import com.cybereast.modernqueue.utils.CommonKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,13 +37,15 @@ class SessionsFragment : Fragment() {
     private var mRecyclerListener = object : RecyclerItemClickListener {
         override fun onClick(data: Any?, position: Int) {
             val session = data as Session
-            findNavController().navigate(R.id.action_navigation_session_to_navigation_bookings)
-            Log.d("TAG", "onClick: ${session.documentId}")
+            val bundle=Bundle()
+            bundle.putString(CommonKeys.KEY_SESSION_ID,session.sessionId)
+            findNavController().navigate(R.id.action_navigation_session_to_navigation_bookings,bundle)
+            Log.d("TAG", "onClick: ${session.sessionId}")
         }
 
         override fun onItemChildClick(view: View, data: Any?) {
             val session = data as Session
-            deletePopUp(view, session.documentId)
+            deletePopUp(view, session.sessionId)
 
         }
 
@@ -106,7 +109,7 @@ class SessionsFragment : Fragment() {
         fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
             .collection(
                 Constants.COLLECTION_SESSIONS
-            ).document(session.documentId.toString()).update(sessionMap).addOnCompleteListener {
+            ).document(session.sessionId.toString()).update(sessionMap).addOnCompleteListener {
                 if (it.isSuccessful) {
                     if (checked)
                         AppUtils.showToast(requireContext(), "Booking opened")
@@ -132,7 +135,7 @@ class SessionsFragment : Fragment() {
                 sessionList.clear()
                 for (v in value) {
                     val session = v.toObject(Session::class.java)
-                    session.documentId = v.id
+                    session.sessionId = v.id
                     sessionList.add(session)
                 }
             } else {

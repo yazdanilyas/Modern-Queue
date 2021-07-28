@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cybereast.modernqueue.R
 import com.cybereast.modernqueue.adapters.SessionsAdapterPatient
 import com.cybereast.modernqueue.constants.Constants
-import com.cybereast.modernqueue.databinding.FragmentSessionsBinding
 import com.cybereast.modernqueue.databinding.FragmentSessionsDoctorBinding
 import com.cybereast.modernqueue.doctor.ui.fragments.sessions.DoctorsSessionsViewModel
 import com.cybereast.modernqueue.enums.BookingStatus
@@ -58,12 +57,12 @@ class DoctorsSessionsFragment : Fragment() {
             }
 
 //            findNavController().navigate(R.id.action_navigation_session_to_navigation_bookings)
-            Log.d("TAG", "onClick: ${session.documentId}")
+            Log.d("TAG", "onClick: ${session.sessionId}")
         }
 
         override fun onItemChildClick(view: View, data: Any?) {
             val session = data as Session
-            deletePopUp(view, session.documentId)
+            deletePopUp(view, session.sessionId)
 
         }
 
@@ -76,6 +75,7 @@ class DoctorsSessionsFragment : Fragment() {
     private fun saveBooking(session: Session, doctor: Doctor?) {
 
         val booking = Booking(
+            null,
             doctor?.uId,
             doctor?.firstName,
             doctor?.lastName,
@@ -85,7 +85,7 @@ class DoctorsSessionsFragment : Fragment() {
             doctor?.speciality,
             doctor?.consultancyFee,
             doctor?.available,
-            session.documentId,
+            session.sessionId,
             session.startTime,
             session.endTime,
             session.noOfTokens,
@@ -97,7 +97,8 @@ class DoctorsSessionsFragment : Fragment() {
         )
         doctorDocumentRef =
             fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING).document()
-
+        val bookingId = doctorDocumentRef.id
+        booking.bookingId = bookingId
         doctorDocumentRef.set(booking).addOnSuccessListener {
             AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
             AppUtils.showToast(requireContext(), getString(R.string.my_booking))
@@ -166,7 +167,7 @@ class DoctorsSessionsFragment : Fragment() {
         fireStoreDbRef.collection(Constants.COLLECTION_DOCTORS).document(mUId.toString())
             .collection(
                 Constants.COLLECTION_SESSIONS
-            ).document(session.documentId.toString()).update(sessionMap).addOnCompleteListener {
+            ).document(session.sessionId.toString()).update(sessionMap).addOnCompleteListener {
                 if (it.isSuccessful) {
                     if (checked)
                         AppUtils.showToast(requireContext(), "Booking opened")
@@ -192,7 +193,7 @@ class DoctorsSessionsFragment : Fragment() {
                 sessionList.clear()
                 for (v in value) {
                     val session = v.toObject(Session::class.java)
-                    session.documentId = v.id
+                    session.sessionId = v.id
                     sessionList.add(session)
                 }
             } else {

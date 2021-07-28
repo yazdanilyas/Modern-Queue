@@ -59,5 +59,8 @@
     <string name="available_today">Available</string>
     <string name="search">Search</string>
     <string name="see_sessions">See Sessions</string>
+    <string name="end_session">End Session</string>
+    <string name="consulting">Consulting</string>
+    <string name="consulted">Consulted</string>
 
 </resources>

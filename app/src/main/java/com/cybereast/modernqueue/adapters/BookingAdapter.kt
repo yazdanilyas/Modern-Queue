@@ -33,9 +33,9 @@ class BookingAdapter(
 
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         holder.binding.obj = bookingList[position]
-//        holder.binding.sessionItem.setOnClickListener {
-//            mRecyclerListener.onClick(bookingList[position], position)
-//        }
+        holder.binding.optionImg.setOnClickListener {
+            mRecyclerListener.onItemChildClick(it,bookingList[position])
+        }
 
     }
 
