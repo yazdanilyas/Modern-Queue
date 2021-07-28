@@ -62,5 +62,11 @@
     <string name="end_session">End Session</string>
     <string name="consulting">Consulting</string>
     <string name="consulted">Consulted</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="hospital">Hospital:</string>
+    <string name="fee">Fee:</string>
+    <string name="startTime">Start Time:</string>
+    <string name="endTime">End Time:</string>
+
 
 </resources>

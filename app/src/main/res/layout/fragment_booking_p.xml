@@ -13,6 +13,6 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/endSessionButton"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_booking" />
+        tools:listitem="@layout/item_booking_p" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

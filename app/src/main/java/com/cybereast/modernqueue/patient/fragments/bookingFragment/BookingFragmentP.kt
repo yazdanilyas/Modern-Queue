@@ -10,16 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cybereast.modernqueue.R
-import com.cybereast.modernqueue.adapters.BookingAdapter
+import com.cybereast.modernqueue.adapters.BookingAdapterP
 import com.cybereast.modernqueue.constants.Constants
 import com.cybereast.modernqueue.databinding.FragmentBookingPBinding
-import com.cybereast.modernqueue.doctor.ui.fragments.myBookings.MyBookingViewModel
 import com.cybereast.modernqueue.enums.BookingStatus
 import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
 import com.cybereast.modernqueue.models.Booking
 import com.cybereast.modernqueue.models.Session
 import com.cybereast.modernqueue.utils.AppUtils
-import com.cybereast.modernqueue.utils.CommonKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -37,7 +35,7 @@ class BookingFragmentP : Fragment() {
     private lateinit var mViewModel: BookingPViewModel
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
     private val mAuth = FirebaseAuth.getInstance()
-    private lateinit var mAdapter: BookingAdapter
+    private lateinit var mAdapter: BookingAdapterP
     private var mRecyclerListener = object : RecyclerItemClickListener {
         override fun onClick(data: Any?, position: Int) {
             val session = data as Session
@@ -81,7 +79,7 @@ class BookingFragmentP : Fragment() {
 
     private fun setUpRecycler() {
         mAdapter =
-            BookingAdapter(mViewModel.bookingList, mRecyclerListener)
+            BookingAdapterP(mViewModel.bookingList, mRecyclerListener)
         mBinding.bookingRecycler.layoutManager =
             LinearLayoutManager(activity)
         mBinding.bookingRecycler.setHasFixedSize(true)
@@ -106,14 +104,11 @@ class BookingFragmentP : Fragment() {
 
     private fun setPatientBookingStatus(view: View, booking: Booking) {
         val popUp = PopupMenu(requireActivity(), view)
-        popUp.menuInflater.inflate(R.menu.menu_booking_options, popUp.menu)
+        popUp.menuInflater.inflate(R.menu.menu_booking_options_cancelled, popUp.menu)
         popUp.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.menu_consulting -> {
-                    setBookingStatus(view, booking, BookingStatus.CONSULTING.toString())
-                }
-                R.id.menu_consulted -> {
-                    setBookingStatus(view, booking, BookingStatus.CONSULTED.toString())
+                R.id.menu_cancelled -> {
+                    setBookingStatus(view, booking, BookingStatus.CANCELLED.toString())
                 }
             }
             true
