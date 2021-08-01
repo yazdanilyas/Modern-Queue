@@ -70,6 +70,7 @@
     <string name="write_patient_name">Write patient name</string>
     <string name="phone_number">Phone Number</string>
     <string name="save_booking">Save Booking</string>
+    <string name="booking_success">Booked successfully</string>
 
 
 </resources>

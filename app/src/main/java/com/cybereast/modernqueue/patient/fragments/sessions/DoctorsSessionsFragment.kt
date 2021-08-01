@@ -90,7 +90,7 @@ class DoctorsSessionsFragment : Fragment() {
     }
 
     private fun saveBooking(session: Session?, doctor: Doctor?, patient: Patient) {
-
+        AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)
         val booking = Booking(
             null,
             doctor?.uId,
@@ -118,7 +118,7 @@ class DoctorsSessionsFragment : Fragment() {
         booking.bookingId = bookingId
         doctorDocumentRef.set(booking).addOnSuccessListener {
             AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
-            AppUtils.showToast(requireContext(), getString(R.string.my_booking))
+            AppUtils.showToast(requireContext(), getString(R.string.booking_success))
 
         }.addOnFailureListener {
             AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)

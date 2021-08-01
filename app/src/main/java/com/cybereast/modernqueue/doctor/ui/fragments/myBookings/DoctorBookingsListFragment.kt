@@ -78,6 +78,7 @@ class DoctorBookingsListFragment : Fragment() {
     }
 
     private fun setListeners() {
+        AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)
         mBinding.endSessionButton.setOnClickListener {
             val batchWrite = fireStoreDbRef.batch()
             for (booking in mListViewModel.bookingList) {
@@ -86,8 +87,11 @@ class DoctorBookingsListFragment : Fragment() {
                 batchWrite.delete(docRef)
             }
             batchWrite.commit().addOnSuccessListener(OnSuccessListener<Void?> {
-                AppUtils.showToast(requireContext(), "Session ended")
+                AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
+                AppUtils.showToast(requireContext(), "Session Close")
+                activity?.onBackPressed()
             }).addOnFailureListener {
+                AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
                 AppUtils.showToast(requireContext(), it.message.toString())
             }
         }
