@@ -1,8 +1,11 @@
 package com.cybereast.modernqueue.patient.fragments.sessions
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +20,11 @@ import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
 import com.cybereast.modernqueue.listeners.SwitchStateListener
 import com.cybereast.modernqueue.models.Booking
 import com.cybereast.modernqueue.models.Doctor
+import com.cybereast.modernqueue.models.Patient
 import com.cybereast.modernqueue.models.Session
 import com.cybereast.modernqueue.utils.AppUtils
 import com.cybereast.modernqueue.utils.CommonKeys
+import com.cybereast.modernqueue.utils.DialogUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,13 +45,21 @@ class DoctorsSessionsFragment : Fragment() {
     private lateinit var mViewModel: DoctorsSessionsViewModel
     private var mRecyclerListener = object : RecyclerItemClickListener {
         override fun onClick(data: Any?, position: Int) {
-            val session = data as Session
-            val sessionBookingStatus = session.booking
+
+        }
+
+        override fun onItemChildClick(view: View, data: Any?) {
+//            val session = data as Session
+//            deletePopUp(view, session.sessionId)
+            mViewModel.mSession = data as Session
+            var sessionBookingStatus: Boolean? = null
+            mViewModel.mSession.let {
+                sessionBookingStatus = it?.booking
+            }
             val doctorAvailability = mViewModel.mDoctor?.available
             if (doctorAvailability == true) {
                 if (sessionBookingStatus == true) {
-
-                    saveBooking(session, mViewModel.mDoctor)
+                    activity?.let { DialogUtils.bookingDialog(it, mDialogButtonListener) }
 
                 } else {
                     AppUtils.showToast(requireContext(), "Booking not opened yet for this session")
@@ -56,14 +69,6 @@ class DoctorsSessionsFragment : Fragment() {
                 AppUtils.showToast(requireContext(), "Doctor not available today")
             }
 
-//            findNavController().navigate(R.id.action_navigation_session_to_navigation_bookings)
-            Log.d("TAG", "onClick: ${session.sessionId}")
-        }
-
-        override fun onItemChildClick(view: View, data: Any?) {
-            val session = data as Session
-            deletePopUp(view, session.sessionId)
-
         }
 
         override fun onSeeProfile(data: Any?, position: Int) {
@@ -72,7 +77,20 @@ class DoctorsSessionsFragment : Fragment() {
 
     }
 
-    private fun saveBooking(session: Session, doctor: Doctor?) {
+    private val mDialogButtonListener = object : DialogUtils.DialogButtonListener {
+        override fun onPositiveClick(data: Any) {
+            val patient = data as Patient
+            saveBooking(mViewModel.mSession, mViewModel.mDoctor, patient)
+        }
+
+        override fun onNegativeClick(dialog: DialogInterface) {
+            dialog.dismiss()
+        }
+
+
+    }
+
+    private fun saveBooking(session: Session?, doctor: Doctor?, patient: Patient) {
 
         val booking = Booking(
             null,
@@ -85,15 +103,15 @@ class DoctorsSessionsFragment : Fragment() {
             doctor?.speciality,
             doctor?.consultancyFee,
             doctor?.available,
-            session.sessionId,
-            session.startTime,
-            session.endTime,
-            session.noOfTokens,
-            session.booking,
+            session?.sessionId,
+            session?.startTime,
+            session?.endTime,
+            session?.noOfTokens,
+            session?.booking,
             BookingStatus.OPENED.toString(),
             patientUserId,
-            "Hassan",
-            "3120519340"
+            patient.name,
+            patient.phoneNumber
         )
         doctorDocumentRef =
             fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING).document()

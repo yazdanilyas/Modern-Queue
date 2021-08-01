@@ -67,6 +67,9 @@
     <string name="fee">Fee:</string>
     <string name="startTime">Start Time:</string>
     <string name="endTime">End Time:</string>
+    <string name="write_patient_name">Write patient name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="save_booking">Save Booking</string>
 
 
 </resources>

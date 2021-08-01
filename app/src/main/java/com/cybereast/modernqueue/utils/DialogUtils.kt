@@ -4,14 +4,49 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.text.TextUtils
 import androidx.appcompat.widget.AppCompatEditText
 import com.cybereast.modernqueue.R
-import com.cybereast.modernqueue.models.Session
+import com.cybereast.modernqueue.models.Patient
 import java.util.*
 
 
 object DialogUtils {
+
+
+    fun bookingDialog(activity: Activity, buttonListener: DialogButtonListener) {
+        val inflater = activity.layoutInflater
+        val view = inflater.inflate(R.layout.dialog_booking_layout, null)
+        val builder = AlertDialog.Builder(activity)
+            .setTitle("Booking")
+            .setCancelable(false)
+            .setView(view)
+
+        val patientName = view.findViewById<AppCompatEditText>(R.id.patientNameEt)
+        val patientPhone = view.findViewById<AppCompatEditText>(R.id.patientPhoneEt)
+
+        setDialogButtons(activity, builder, buttonListener)
+        val alertDialog = builder.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            if (!TextUtils.isEmpty(patientName.text.toString()) && !TextUtils.isEmpty(patientName.text.toString())) {
+                val patient = Patient(patientName.text.toString(), patientPhone.text.toString())
+                buttonListener.onPositiveClick(patient)
+                alertDialog.dismiss()
+            } else {
+                if (TextUtils.isEmpty(patientName.text.toString())) {
+                    patientName.error = activity.getString(R.string.required_field)
+                }
+                if (TextUtils.isEmpty(patientPhone.text.toString())) {
+                    patientPhone.error = activity.getString(R.string.required_field)
+                }
+            }
+        }
+
+    }
+
+
     fun addSessionDialog(
         activity: Activity,
         buttonListener: DialogButtonListener,
@@ -65,10 +100,10 @@ object DialogUtils {
         buttonListener: DialogButtonListener,
 
         ) {
-        builder.setPositiveButton(context.getString(R.string.add_str)) { dialog, id ->
+        builder.setPositiveButton(context.getString(R.string.save_booking)) { dialog, id ->
         }
         builder.setNegativeButton(context.getString(R.string.cancel_str)) { dialog, id ->
-            buttonListener.onNegativeClick()
+            buttonListener.onNegativeClick(dialog)
             dialog.dismiss()
         }
 
@@ -122,8 +157,8 @@ object DialogUtils {
 
 
     interface DialogButtonListener {
-        fun onPositiveClick(session: Session)
-        fun onNegativeClick()
+        fun onPositiveClick(data: Any)
+        fun onNegativeClick(dialog: DialogInterface)
     }
 
 }

@@ -33,6 +33,10 @@ class BookingAdapterP(
         holder.binding.optionImg.setOnClickListener {
             mRecyclerListener.onItemChildClick(it, bookingList[position])
         }
+        holder.binding.containerCv.setOnClickListener {
+
+            mRecyclerListener.onClick(bookingList[position], position)
+        }
 
     }
 

@@ -16,8 +16,10 @@ import com.cybereast.modernqueue.databinding.FragmentBookingPBinding
 import com.cybereast.modernqueue.enums.BookingStatus
 import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
 import com.cybereast.modernqueue.models.Booking
-import com.cybereast.modernqueue.models.Session
+import com.cybereast.modernqueue.patient.fragments.bookingDetailFragment.BookingDetailFragmentP
+import com.cybereast.modernqueue.utils.ActivityUtils
 import com.cybereast.modernqueue.utils.AppUtils
+import com.cybereast.modernqueue.utils.CommonKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -38,9 +40,15 @@ class BookingFragmentP : Fragment() {
     private lateinit var mAdapter: BookingAdapterP
     private var mRecyclerListener = object : RecyclerItemClickListener {
         override fun onClick(data: Any?, position: Int) {
-            val session = data as Session
+            val booking = data as Booking
             val bundle = Bundle()
-            Log.d("TAG", "onClick: ${session.sessionId}")
+            bundle.putString(CommonKeys.KEY_SESSION_ID, booking.sessionId)
+            ActivityUtils.launchFragment(
+                requireContext(),
+                BookingDetailFragmentP::class.java.name,
+                bundle
+            )
+            Log.d("TAG", "onClick: ${booking.sessionId}")
         }
 
         override fun onItemChildClick(view: View, data: Any?) {

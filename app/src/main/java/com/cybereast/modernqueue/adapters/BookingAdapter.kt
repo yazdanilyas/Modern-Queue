@@ -1,10 +1,7 @@
 package com.cybereast.modernqueue.adapters
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cybereast.modernqueue.R
@@ -14,8 +11,8 @@ import com.cybereast.modernqueue.models.Booking
 import java.util.*
 
 class BookingAdapter(
-        private val bookingList: ArrayList<Booking>,
-        private val mRecyclerListener: RecyclerItemClickListener,
+    private val bookingList: ArrayList<Booking>,
+    private val mRecyclerListener: RecyclerItemClickListener?,
 ) :
         RecyclerView.Adapter<BookingAdapter.SessionViewHolder>() {
     private lateinit var mBinding: ItemBookingBinding
@@ -34,7 +31,7 @@ class BookingAdapter(
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         holder.binding.obj = bookingList[position]
         holder.binding.optionImg.setOnClickListener {
-            mRecyclerListener.onItemChildClick(it,bookingList[position])
+            mRecyclerListener?.onItemChildClick(it, bookingList[position])
         }
 
     }

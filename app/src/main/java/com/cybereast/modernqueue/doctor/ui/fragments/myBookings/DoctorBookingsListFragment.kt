@@ -24,16 +24,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class MyBookingsFragment : Fragment() {
+class DoctorBookingsListFragment : Fragment() {
     companion object {
-        fun newInstance() = MyBookingsFragment()
-        fun newInstance(mBundle: Bundle) = MyBookingsFragment().apply {
+        fun newInstance() = DoctorBookingsListFragment()
+        fun newInstance(mBundle: Bundle) = DoctorBookingsListFragment().apply {
             arguments = mBundle
         }
     }
 
     private lateinit var mBinding: FragmentMyBookingsBinding
-    private lateinit var mViewModel: MyBookingViewModel
+    private lateinit var mListViewModel: DoctorBookingListViewModel
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
     private val mAuth = FirebaseAuth.getInstance()
     private lateinit var mAdapter: BookingAdapter
@@ -71,7 +71,7 @@ class MyBookingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel = ViewModelProvider(this).get(MyBookingViewModel::class.java)
+        mListViewModel = ViewModelProvider(this).get(DoctorBookingListViewModel::class.java)
         getBundleData()
         getMyBookings()
         setListeners()
@@ -80,7 +80,7 @@ class MyBookingsFragment : Fragment() {
     private fun setListeners() {
         mBinding.endSessionButton.setOnClickListener {
             val batchWrite = fireStoreDbRef.batch()
-            for (booking in mViewModel.bookingList) {
+            for (booking in mListViewModel.bookingList) {
                 val docRef = fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING)
                     .document(booking.bookingId.toString())
                 batchWrite.delete(docRef)
@@ -95,7 +95,7 @@ class MyBookingsFragment : Fragment() {
 
     private fun setUpRecycler() {
         mAdapter =
-            BookingAdapter(mViewModel.bookingList, mRecyclerListener)
+            BookingAdapter(mListViewModel.bookingList, mRecyclerListener)
         mBinding.bookingRecycler.layoutManager =
             LinearLayoutManager(activity)
         mBinding.bookingRecycler.setHasFixedSize(true)
@@ -104,7 +104,7 @@ class MyBookingsFragment : Fragment() {
 
     private fun getBundleData() {
         arguments.let {
-            mViewModel.sessionId = it?.getString(CommonKeys.KEY_SESSION_ID)
+            mListViewModel.sessionId = it?.getString(CommonKeys.KEY_SESSION_ID)
 //            Log.d(TAG, "getBundleData: ")
         }
     }
@@ -113,13 +113,13 @@ class MyBookingsFragment : Fragment() {
         val query =
             fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING)
                 .whereEqualTo("uid", mAuth.currentUser?.uid)
-                .whereEqualTo("sessionId", mViewModel.sessionId).get()
+                .whereEqualTo("sessionId", mListViewModel.sessionId).get()
                 .addOnSuccessListener { snapshot ->
 
                     Log.d("TAG", "getMyBookings: " + snapshot.size())
                     for (snap in snapshot) {
                         val booking = snap.toObject(Booking::class.java)
-                        mViewModel.bookingList.add(booking)
+                        mListViewModel.bookingList.add(booking)
                         Log.d("TAG", "getMyBookings: $booking")
                     }
                     setUpRecycler()

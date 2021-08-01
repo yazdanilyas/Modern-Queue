@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cybereast.modernqueue.models.Doctor
+import com.cybereast.modernqueue.models.Session
 
 class DoctorsSessionsViewModel : ViewModel() {
 
@@ -12,4 +13,5 @@ class DoctorsSessionsViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
     var mDoctor: Doctor? = null
+    var mSession: Session? = null
 }

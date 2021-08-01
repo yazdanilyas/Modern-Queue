@@ -8,23 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cybereast.modernqueue.R
 import com.cybereast.modernqueue.adapters.BookingAdapter
 import com.cybereast.modernqueue.constants.Constants
-import com.cybereast.modernqueue.databinding.FragmentMyBookingsBinding
+import com.cybereast.modernqueue.databinding.BookingDetailFragmentBinding
 import com.cybereast.modernqueue.models.Booking
 import com.cybereast.modernqueue.utils.CommonKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class BookingkDetailFragmentP : Fragment() {
+class BookingDetailFragmentP : Fragment() {
 
     companion object {
-        fun newInstance() = BookingkDetailFragmentP()
+        fun newInstance() = BookingDetailFragmentP()
     }
 
-    private lateinit var viewModel: BookingkDetailFragmentViewModel
-    private lateinit var mBinding: FragmentMyBookingsBinding
+    private lateinit var viewModel: BookingDetailFragmentViewModel
+    private lateinit var mBinding: BookingDetailFragmentBinding
     private var fireStoreDbRef = FirebaseFirestore.getInstance()
     private val mAuth = FirebaseAuth.getInstance()
     private lateinit var mAdapter: BookingAdapter
@@ -32,13 +31,14 @@ class BookingkDetailFragmentP : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.bookingk_detail_fragment_fragment, container, false)
+        mBinding = BookingDetailFragmentBinding.inflate(inflater, container, false)
+        return mBinding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BookingkDetailFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BookingDetailFragmentViewModel::class.java)
         getBundleData()
         getMyBookings()
     }

@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/navigation_bookings"
-        android:name="com.cybereast.modernqueue.doctor.ui.fragments.myBookings.MyBookingsFragment"
+        android:name="com.cybereast.modernqueue.doctor.ui.fragments.myBookings.DoctorBookingsListFragment"
         android:label="@string/booking"
         tools:layout="@layout/fragment_my_bookings" />
 </navigation>
