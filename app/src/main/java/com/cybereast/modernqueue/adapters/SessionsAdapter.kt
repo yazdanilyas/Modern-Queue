@@ -1,10 +1,7 @@
 package com.cybereast.modernqueue.adapters
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cybereast.modernqueue.R
@@ -42,20 +39,6 @@ class SessionsAdapter(
             mRecyclerListener.onItemChildClick(it, sessionList[position])
         }
 
-        holder.binding.bookingSwitch.setOnTouchListener { view: View, motionEvent: MotionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-
-                    holder.binding.bookingSwitch.setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
-                        mSwitchListener.onChecked(compoundButton, isChecked, sessionList[position])
-                    }
-                    holder.binding.bookingSwitch.performClick()
-                    true
-                }
-
-                else -> false
-            }
-        }
 
     }
 

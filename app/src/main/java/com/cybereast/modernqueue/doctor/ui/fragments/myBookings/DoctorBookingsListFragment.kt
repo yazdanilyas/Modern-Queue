@@ -110,20 +110,28 @@ class DoctorBookingsListFragment : Fragment() {
     }
 
     private fun getMyBookings() {
-        val query =
-            fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING)
-                .whereEqualTo("uid", mAuth.currentUser?.uid)
-                .whereEqualTo("sessionId", mListViewModel.sessionId).get()
-                .addOnSuccessListener { snapshot ->
-
-                    Log.d("TAG", "getMyBookings: " + snapshot.size())
+        AppUtils.showHideProgressBar(mBinding.progressBar, View.VISIBLE)
+        fireStoreDbRef.collection(Constants.COLLECTION_PATIENT_BOOKING)
+            .whereEqualTo("uid", mAuth.currentUser?.uid)
+            .whereEqualTo("sessionId", mListViewModel.sessionId).get()
+            .addOnSuccessListener { snapshot ->
+                Log.d("TAG", "getMyBookings: " + snapshot.size())
+                if (snapshot.size() > 0) {
                     for (snap in snapshot) {
                         val booking = snap.toObject(Booking::class.java)
                         mListViewModel.bookingList.add(booking)
                         Log.d("TAG", "getMyBookings: $booking")
                     }
+                    mBinding.noDataTv.visibility = View.GONE
+                    mBinding.endSessionButton.visibility = View.VISIBLE
+                    AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
                     setUpRecycler()
+                } else {
+                    mBinding.endSessionButton.visibility = View.GONE
+                    mBinding.noDataTv.visibility = View.VISIBLE
+                    AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
                 }
+            }
     }
 
     private fun setPatientBookingStatus(view: View, booking: Booking) {

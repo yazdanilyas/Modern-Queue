@@ -17,7 +17,6 @@ import com.cybereast.modernqueue.databinding.FragmentSessionsDoctorBinding
 import com.cybereast.modernqueue.doctor.ui.fragments.sessions.DoctorsSessionsViewModel
 import com.cybereast.modernqueue.enums.BookingStatus
 import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
-import com.cybereast.modernqueue.listeners.SwitchStateListener
 import com.cybereast.modernqueue.models.Booking
 import com.cybereast.modernqueue.models.Doctor
 import com.cybereast.modernqueue.models.Patient
@@ -126,18 +125,6 @@ class DoctorsSessionsFragment : Fragment() {
             AppUtils.showToast(requireContext(), it.message.toString())
             Log.d("TAG", "addNewSession: ${it.message}")
         }
-    }
-
-    private var mSwitchListener = object : SwitchStateListener {
-        override fun onChecked(view: View, isChecked: Boolean, data: Any?) {
-            if (isChecked) {
-//                setSessionBookingStatus(view, isChecked, data)
-
-            } else {
-//                setSessionBookingStatus(view, false, data)
-            }
-        }
-
     }
 
 
@@ -265,7 +252,7 @@ class DoctorsSessionsFragment : Fragment() {
 
     private fun setUpRecycler(sessionList: java.util.ArrayList<Session>) {
         mAdapter =
-            SessionsAdapterPatient(sessionList, mRecyclerListener, mSwitchListener)
+            SessionsAdapterPatient(sessionList, mRecyclerListener)
         mBinding.sessionRecycler.layoutManager =
             LinearLayoutManager(activity)
         mBinding.sessionRecycler.setHasFixedSize(true)

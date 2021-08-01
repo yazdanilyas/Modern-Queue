@@ -1,24 +1,18 @@
 package com.cybereast.modernqueue.adapters
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cybereast.modernqueue.R
-import com.cybereast.modernqueue.databinding.ItemSessionRecyclerBinding
 import com.cybereast.modernqueue.databinding.ItemSessionRecyclerDoctorBinding
 import com.cybereast.modernqueue.listeners.RecyclerItemClickListener
-import com.cybereast.modernqueue.listeners.SwitchStateListener
 import com.cybereast.modernqueue.models.Session
 import java.util.*
 
 class SessionsAdapterPatient(
-        private val sessionList: ArrayList<Session>,
-        private val mRecyclerListener: RecyclerItemClickListener,
-        private val mSwitchListener: SwitchStateListener
+    private val sessionList: ArrayList<Session>,
+    private val mRecyclerListener: RecyclerItemClickListener
 ) :
         RecyclerView.Adapter<SessionsAdapterPatient.SessionViewHolder>() {
     private lateinit var mBinding: ItemSessionRecyclerDoctorBinding
@@ -39,26 +33,10 @@ class SessionsAdapterPatient(
         holder.binding.sessionItem.setOnClickListener {
             mRecyclerListener.onClick(sessionList[position], position)
         }
-        holder.binding.optionImg.setOnClickListener {
+        holder.binding.bookingButton.setOnClickListener {
             mRecyclerListener.onItemChildClick(it, sessionList[position])
         }
-        holder.binding.bookingButton.setOnClickListener {
-            mRecyclerListener.onClick(sessionList[position], position)
-        }
-        holder.binding.bookingSwitch.setOnTouchListener { view: View, motionEvent: MotionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
 
-                    holder.binding.bookingSwitch.setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
-                        mSwitchListener.onChecked(compoundButton, isChecked, sessionList[position])
-                    }
-                    holder.binding.bookingSwitch.performClick()
-                    true
-                }
-
-                else -> false
-            }
-        }
 
     }
 

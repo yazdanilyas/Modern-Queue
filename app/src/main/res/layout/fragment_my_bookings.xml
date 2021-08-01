@@ -7,22 +7,46 @@
     tools:context=".doctor.ui.fragments.myBookings.DoctorBookingsListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginBottom="@dimen/_10dp"
         android:id="@+id/bookingRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_10dp"
         app:layout_constraintBottom_toTopOf="@+id/endSessionButton"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_booking" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/noDataTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_found"
+        android:textSize="@dimen/_20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginBottom="?actionBarSize"
-        android:textColor="@color/white"
-        android:background="@color/blue"
-        android:textAllCaps="false"
-        android:text="@string/end_session"
         android:id="@+id/endSessionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:text="@string/end_session"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
