@@ -19,21 +19,29 @@ class PatientDashboardActivity : AppCompatActivity() {
         mBinding = ActivityPatientDashboardBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setBottomNavigationSelector()
+        setUpActionBar("Search Doctor")
         openFragment(SearchDoctorFragment.newInstance())
+    }
+
+    private fun setUpActionBar(title: String) {
+        supportActionBar?.title = title
     }
 
     private fun setBottomNavigationSelector() {
         mBinding.bottomNavPatient.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_search_doc -> {
+                    setUpActionBar("Search Doctor")
                     openFragment(SearchDoctorFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_bookings -> {
+                    setUpActionBar("My Bookings")
                     openFragment(BookingFragmentP.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_more -> {
+                    setUpActionBar("More")
                     openFragment(MoreFragmentP.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }

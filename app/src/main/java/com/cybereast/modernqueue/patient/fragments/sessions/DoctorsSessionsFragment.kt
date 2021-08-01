@@ -107,7 +107,7 @@ class DoctorsSessionsFragment : Fragment() {
             session?.endTime,
             session?.noOfTokens,
             session?.booking,
-            BookingStatus.OPENED.toString(),
+            BookingStatus.NEW.toString(),
             patientUserId,
             patient.name,
             patient.phoneNumber
@@ -150,21 +150,6 @@ class DoctorsSessionsFragment : Fragment() {
         mUId = getUId()
         getAllSessions()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        val menuInflater = requireActivity().menuInflater
-//        menuInflater.inflate(R.menu.session_menu, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.menu_add_session -> {
-//                startActivity(Intent(requireActivity(), AddSessionActivity::class.java))
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     private fun setSessionBookingStatus(view: View, checked: Boolean, data: Any?) {
         val session = data as Session

@@ -4,5 +4,5 @@ enum class BookingStatus {
     CONSULTING,
     CONSULTED,
     CANCELLED,
-    OPENED
+    NEW
 }

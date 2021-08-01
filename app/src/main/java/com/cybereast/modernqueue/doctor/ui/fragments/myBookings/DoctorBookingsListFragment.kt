@@ -88,7 +88,7 @@ class DoctorBookingsListFragment : Fragment() {
             }
             batchWrite.commit().addOnSuccessListener(OnSuccessListener<Void?> {
                 AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
-                AppUtils.showToast(requireContext(), "Session Close")
+                AppUtils.showToast(requireContext(), "Session Closed")
                 activity?.onBackPressed()
             }).addOnFailureListener {
                 AppUtils.showHideProgressBar(mBinding.progressBar, View.GONE)
