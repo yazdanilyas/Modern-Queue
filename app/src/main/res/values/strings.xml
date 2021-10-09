@@ -30,4 +30,47 @@
     <string name="error_phone">Phone is invalid</string>
     <string name="required_field">Required field</string>
     <string name="speciality">speciality</string>
+    <string name="consultancy_fee">Consultancy Fee</string>
+    <string name="sign_up_success_message">Signup successful</string>
+    <string name="logout">Logout</string>
+    <string name="session_expired">Session expired</string>
+    <string name="edit">Edit</string>
+    <string name="available">Available</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="add_session">Add session</string>
+    <string name="maximum_tokens_allowed">Maximum tokens allowed</string>
+    <string name="select_end_time">Select end time</string>
+    <string name="select_start_time">Select start time</string>
+    <string name="new_session">Add new session</string>
+    <string name="add_str">Add</string>
+    <string name="cancel_str">Cancel</string>
+    <string name="missing_fields_message">Some fields are missing</string>
+    <string name="session_added">Session added successfully</string>
+    <string name="booking">Booking</string>
+    <string name="to">To</string>
+    <string name="session_deleted">Session deleted</string>
+    <string name="delete">Delete</string>
+    <string name="no_data_found">No data found</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">This is booking screen under development</string>
+    <string name="my_booking">My booking</string>
+    <string name="search_doctor">Search doctor</string>
+    <string name="not_available_today">Not available today</string>
+    <string name="available_today">Available</string>
+    <string name="search">Search</string>
+    <string name="see_sessions">See Sessions</string>
+    <string name="end_session">End Session</string>
+    <string name="consulting">Consulting</string>
+    <string name="consulted">Consulted</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="hospital">Hospital:</string>
+    <string name="fee">Fee:</string>
+    <string name="startTime">Start Time:</string>
+    <string name="endTime">End Time:</string>
+    <string name="write_patient_name">Write patient name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="save_booking">Save Booking</string>
+    <string name="booking_success">Booked successfully</string>
+
+
 </resources>

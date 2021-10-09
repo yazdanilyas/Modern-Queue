@@ -19,4 +19,8 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

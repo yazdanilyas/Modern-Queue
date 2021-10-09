@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="obj"
+            type="com.cybereast.modernqueue.models.Doctor" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_5dp"
+        android:layout_marginBottom="@dimen/_3dp"
+        android:elevation="@dimen/_4dp"
+        app:cardCornerRadius="@dimen/_3dp"
+        app:contentPadding="@dimen/_5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/seeProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5dp"
+                android:background="@drawable/shape_rectangle_square"
+                android:fontFamily="@font/montserrat_bold"
+                android:padding="@dimen/_5dp"
+                android:text="See Profile"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/doctorImage"
+                android:layout_width="@dimen/_100dp"
+                android:layout_height="@dimen/_100dp"
+                android:src="@drawable/ic_user_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doctorNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:maxLines="2"
+                android:text="@{obj.firstName+' '+obj.lastName}"
+                app:layout_constraintLeft_toRightOf="@+id/doctorImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doctorSpecialityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:drawableStart="@drawable/ic_speciality"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center_vertical"
+                android:text="@{obj.speciality}"
+                app:layout_constraintLeft_toRightOf="@+id/doctorImage"
+                app:layout_constraintTop_toBottomOf="@+id/doctorNameTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doctorHospitalNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:drawableStart="@drawable/ic_hospital"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center_vertical"
+                android:text="@{obj.hospitalName}"
+                app:layout_constraintLeft_toRightOf="@+id/doctorImage"
+                app:layout_constraintTop_toBottomOf="@+id/doctorSpecialityTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doctorFeeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:drawableStart="@drawable/ic_dollar"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center_vertical"
+                android:text="@{String.valueOf(obj.consultancyFee)}"
+                app:layout_constraintLeft_toRightOf="@+id/doctorImage"
+                app:layout_constraintTop_toBottomOf="@+id/doctorHospitalNameTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doctorAvailabilityTv"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40dp"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:drawableStart="@{obj.available ?@drawable/ic_circle_green:@drawable/ic_circle_grey}"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{obj.available ? @string/available_today:@string/not_available_today}"
+                android:textColor="@{obj.available? @color/colorGreen:@color/colorGrey}"
+                app:layout_constraintLeft_toRightOf="@+id/doctorImage"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doctorFeeTv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
